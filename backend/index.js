@@ -17,24 +17,24 @@ mongoose.connect(process.env.MONGO_URI)
 app.get('/api/tasks', async (req, res) => {
   try {
     const tasks = await Task.find();
-    res.status(200).json(tasks); // Código 200: OK [cite: 55]
+    res.status(200).json(tasks); // Código 200: OK 
   } catch (err) {
-    res.status(500).json({ error: err.message }); // Código 500: Error [cite: 55]
+    res.status(500).json({ error: err.message }); // Código 500: Error
   }
 });
 
-// POST /api/tasks: Crear tarea [cite: 36]
+// POST /api/tasks: Crear tarea 
 app.post('/api/tasks', async (req, res) => {
   try {
     const newTask = new Task(req.body);
     await newTask.save();
-    res.status(201).json(newTask); // Código 201: Creado [cite: 55]
+    res.status(201).json(newTask); // Código 201: Creado 
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
 
-// DELETE /api/tasks/:id: Eliminar tarea [cite: 37]
+// DELETE /api/tasks/:id: Eliminar tarea 
 app.delete('/api/tasks/:id', async (req, res) => {
   try {
     await Task.findByIdAndDelete(req.params.id);
@@ -44,6 +44,7 @@ app.delete('/api/tasks/:id', async (req, res) => {
   }
 });
 
-// Escuchar en puerto 3000 o 3001 [cite: 32]
+// Escuchar en puerto 3000 o 3001 
 const PORT = process.env.PORT || 3000;
+
 app.listen(PORT, () => console.log(`Servidor corriendo en puerto ${PORT}`));
